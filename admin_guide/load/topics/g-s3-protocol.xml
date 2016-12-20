@@ -10,10 +10,10 @@
       <p>The <codeph>s3</codeph> protocol is used in a URL that specifies the location of an Amazon
          S3 bucket and a prefix to use for reading or writing files in the bucket. You can define
          read-only external tables that use existing data files in the S3 bucket for table data, or
-         writeable external tables that store the data from INSERT operations to files in the S3
+         writable external tables that store the data from INSERT operations to files in the S3
          bucket. Greenplum Database uses the S3 URL and prefix specified in the protocol URL either
          to select one or more files for a read-only table, or to define the location and filename
-         format to use when uploading S3 files for <codeph>INSERT</codeph> operations to writeable
+         format to use when uploading S3 files for <codeph>INSERT</codeph> operations to writable
          tables.</p>
       <p>This topic contains the sections:<ul id="ul_o15_22r_kx">
             <li><xref href="#amazon-emr/s3_prereq" format="dita"/></li>
@@ -90,7 +90,7 @@
    location('s3://s3-us-west-2.amazonaws.com/s3test.pivotal.io/dataset1/normal/
       config=/home/gpadmin/aws_s3/s3.conf')
    FORMAT 'csv';</codeblock><p>For
-                     writeable S3 tables, the protocol URL defines the S3 location in which
+                     writable S3 tables, the protocol URL defines the S3 location in which
                      Greenplum database stores data files for the table, as well as a prefix to use
                      when creating files for table <codeph>INSERT</codeph> operations. For
                      example:<codeblock>CREATE WRITABLE EXTERNAL TABLE S3WRIT (LIKE S3TBL)
@@ -110,13 +110,13 @@
          <p>The <codeph>s3</codeph> protocol URL must the AWS S3 endpoint and S3 bucket name. Each
             Greenplum Database segment instance must have access to the S3 location. The optional
                <varname>S3_prefix</varname> value is used to select files for read-only S3 tables,
-            or as a filename prefix to use when uploading files for S3 writeable tables.</p>
+            or as a filename prefix to use when uploading files for S3 writable tables.</p>
          <note id="s3-prefix-note">Although the <varname>S3_prefix</varname> is an optional part of
-            the syntax, you should always include an S3 prefix for both writeable and read-only S3
+            the syntax, you should always include an S3 prefix for both writable and read-only S3
             tables to separate datasets as part of the <xref
                href="../../../ref_guide/sql_commands/CREATE_EXTERNAL_TABLE.xml#topic1"/>
             syntax.</note>
-         <p>For writeable S3 tables, the <codeph>s3</codeph> protocol URL specifies the endpoint and
+         <p>For writable S3 tables, the <codeph>s3</codeph> protocol URL specifies the endpoint and
             bucket name where Greenplum Database uploads data files for the table. The S3 bucket
             permissions must be <codeph>Upload/Delete</codeph> for the S3 user ID that uploads the
             files. The S3 file prefix is used for each new file uploaded to the S3 location as a
@@ -174,7 +174,7 @@ s3://domain/test1/abcdefff</codeblock>
       </section>
       <section id="section_c2f_zvs_3x">
          <title>About S3 Data Files</title>
-         <p>For each <codeph>INSERT</codeph> operation to a writeable S3 table, each Greenplum
+         <p>For each <codeph>INSERT</codeph> operation to a writable S3 table, each Greenplum
             Database segment uploads a single file to the configured the S3 bucket using the
             filename format <codeph>
                &lt;prefix>&lt;segment_id>&lt;random>.&lt;extension>[.gz]</codeph> where:<ul
@@ -185,13 +185,13 @@ s3://domain/test1/abcdefff</codeblock>
                   filename is unique.</li>
                <li><codeph>&lt;extension></codeph> describes the file type (<codeph>.txt</codeph> or
                      <filepath>.csv</filepath>, depending on the value you provide in the
-                     <codeph>FORMAT</codeph> clause of <codeph>CREATE WRITEABLE EXTERNAL
+                     <codeph>FORMAT</codeph> clause of <codeph>CREATE WRITABLE EXTERNAL
                      TABLE</codeph>). Files created by the <codeph>gpcheckcloud</codeph> utility
                   always uses the extension <filepath>.data</filepath>.</li>
                <li><filepath>.gz</filepath> is appended to the filename if compression is enabled
-                  for S3 writeable tables (the default).</li>
+                  for S3 writable tables (the default).</li>
             </ul></p>
-         <p>For writeable S3 tables, you can configure the buffer size and the number of threads
+         <p>For writable S3 tables, you can configure the buffer size and the number of threads
             that segments use for uploading files. See <xref href="#amazon-emr/s3_config_file"
                format="dita"/>.</p>
          <p>For read-only S3 tables, all of the files specified by the S3 file location
@@ -202,7 +202,7 @@ s3://domain/test1/abcdefff</codeblock>
             be in gzip compressed format. The <codeph>s3</codeph> protocol recognizes the gzip
             format and uncompress the files. Only the gzip compression format is supported. </p>
          <p>The S3 file permissions must be <codeph>Open/Download</codeph> and <codeph>View</codeph>
-            for the S3 user ID that is accessing the files. Writeable S3 tables require the S3 user
+            for the S3 user ID that is accessing the files. Writable S3 tables require the S3 user
             ID to have <codeph>Upload/Delete</codeph> permissions.</p>
          <p>For read-only S3 tables, each segment can download one file at a time from S3 location
             using several threads. To take advantage of the parallel processing performed by the
@@ -248,9 +248,9 @@ s3://domain/test1/abcdefff</codeblock>
             configuration by creating a single location on each segment host. Then you can specify
             the absolute path to the location with the <codeph>config</codeph> parameter in the
                <codeph>s3</codeph> protocol <codeph>LOCATION</codeph> clause. However, note that
-            both read-only and writeable S3 external tables use the same parameter values for their
+            both read-only and writable S3 external tables use the same parameter values for their
             connections. If you want to configure protocol parameters differently for read-only and
-            writeable S3 tables, then you must use two different <codeph>s3</codeph> protocol
+            writable S3 tables, then you must use two different <codeph>s3</codeph> protocol
             configuration files and specify the correct file in the <codeph>CREATE EXTERNAL
                TABLE</codeph> statement when you create each table.</p>
          <p>This example specifies a single file location in the <codeph>s3</codeph> directory of
@@ -280,7 +280,7 @@ chunksize = 67108864</codeblock></p>
                </plentry>
                <plentry>
                   <pt>autocompress</pt>
-                  <pd>For writeable S3 external tables, this parameter specifies whether to compress
+                  <pd>For writable S3 external tables, this parameter specifies whether to compress
                      files (using gzip) before uploading to S3. Files are compressed by default if
                      you do not specify this parameter.</pd>
                </plentry>
@@ -288,7 +288,7 @@ chunksize = 67108864</codeblock></p>
                   <pt>chunksize</pt>
                   <pd>The buffer size that each segment thread uses for reading from or writing to
                      the S3 server. The default is 64 MB. The minimum is 8MB and the maximum is
-                     128MB. <p>When inserting data to a writeable S3 table, each Greenplum Database
+                     128MB. <p>When inserting data to a writable S3 table, each Greenplum Database
                         segment writes the data into its buffer (using multiple threads up to the
                            <codeph>threadnum</codeph> value) until it is full, after which it writes
                         the buffer to a file in the S3 bucket. This process is then repeated as
@@ -297,7 +297,7 @@ chunksize = 67108864</codeblock></p>
                         multipart uploads, the minimum <codeph>chunksize</codeph> value of 8MB
                         supports a maximum insert size of 80GB per Greenplum database segment. The
                         maximum <codeph>chunksize</codeph> value of 128MB supports a maximum insert
-                        size 1.28TB per segment. For writeable S3 tables, you must ensure that the
+                        size 1.28TB per segment. For writable S3 tables, you must ensure that the
                            <codeph>chunksize</codeph> setting can support the anticipated table size
                         of your table. See <xref
                            href="http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html"
@@ -357,12 +357,12 @@ chunksize = 67108864</codeblock></p>
                         >http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region</xref>.</p></li>
                <li>S3 encryption is not supported. The S3 file property <uicontrol>Server Side
                      Encryption</uicontrol> must be <codeph>None</codeph>.</li>
-               <li>For writeable S3 external tables, only the <codeph>INSERT</codeph> operation is
+               <li>For writable S3 external tables, only the <codeph>INSERT</codeph> operation is
                   supported. <codeph>UPDATE</codeph>, <codeph>DELETE</codeph>, and
                      <codeph>TRUNCATE</codeph> operations are not supported.</li>
                <li>Because Amazon S3 allows a maximum of 10,000 parts for multipart uploads, the
                   maximum <codeph>chunksize</codeph> value of 128MB supports a maximum insert size
-                  of 1.28TB per Greenplum database segment for writeable s3 tables. You must ensure
+                  of 1.28TB per Greenplum database segment for writable s3 tables. You must ensure
                   that the <codeph>chunksize</codeph> setting can support the anticipated table size
                   of your table. See <xref
                      href="http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html"

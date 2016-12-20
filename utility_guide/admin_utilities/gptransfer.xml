@@ -74,9 +74,9 @@
       <ul>
         <li id="pk138471">The Greenplum Database utility <codeph>gpfdist</codeph> on the source
           database system. The <codeph>gpfdists</codeph> protocol is not supported.</li>
-        <li id="pk138472">Writeable external tables on the source database system and readable
+        <li id="pk138472">Writable external tables on the source database system and readable
           external tables on the destination database system.</li>
-        <li id="pk138473">Named pipes that transfer the data between a writeable external table and
+        <li id="pk138473">Named pipes that transfer the data between a writable external table and
           a readable external table.</li>
       </ul>
       <p>When copying data into the destination system, it is redistributed on the Greenplum

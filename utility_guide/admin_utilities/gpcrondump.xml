@@ -527,7 +527,7 @@ gp_dump_20130514093000_regular_files</codeblock>
             files listed in the <codeph>_regular_files</codeph> file must also be backed up after
             the completion of the backup job.</pd>
           <pd>To use named pipes for a backup, you need to create the named pipes on all the
-            Greenplum Database and make them writeable before running <codeph>gpcrondump</codeph>. </pd>
+            Greenplum Database and make them writable before running <codeph>gpcrondump</codeph>. </pd>
           <pd>If <codeph>--ddboost</codeph> is specified, <codeph>-K <varname>timestamp</varname>
               [--list-backup-files]</codeph> is not supported.</pd>
         </plentry>

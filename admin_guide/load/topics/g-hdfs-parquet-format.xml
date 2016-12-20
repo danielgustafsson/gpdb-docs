@@ -425,7 +425,7 @@ done</codeblock></p>
                 <row>
                   <entry colname="col1">Option</entry>
                   <entry colname="col2">Values</entry>
-                  <entry>Readable/Writeable</entry>
+                  <entry>Readable/Writable</entry>
                   <entry colname="col3">Default Value</entry>
                 </row>
               </thead>

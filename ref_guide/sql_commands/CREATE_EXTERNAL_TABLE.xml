@@ -181,7 +181,7 @@ CREATE WRITABLE EXTERNAL WEB TABLE <varname>table_name</varname>
         </plentry>
         <plentry>
           <pt>WEB</pt>
-          <pd>Creates a readable or writeable web external table definition in Greenplum Database.
+          <pd>Creates a readable or writable web external table definition in Greenplum Database.
             There are two forms of readable web external tables – those that access files via the
               <codeph>http://</codeph> protocol or those that access data by executing OS commands.
             Writable web external tables output data to an executable program that can accept an
@@ -629,7 +629,7 @@ customer_id=123;</codeblock>
         file. After the file name, you can specify parameters with the HTTP query string syntax that
         starts with ? and uses &amp; between field value pairs.</p><p>For this example
           <varname>location</varname> parameter, this URL sets compression parameters for an Avro
-        format writeable external table.
+        format writable external table.
         <codeblock>'gphdfs://myhdfs:8081/avro/singleAvro/array2.avro?compress=true&amp;compression_type=block&amp;codec=snappy' FORMAT 'AVRO'</codeblock></p><p>See
         "Loading and Unloading Data" in the <i>Greenplum Database Administrator Guide</i> for
         information about reading and writing the Avro and Parquet format files with external
@@ -649,7 +649,7 @@ customer_id=123;</codeblock>
             <row>
               <entry colname="col1">Parameter</entry>
               <entry colname="col2">Value</entry>
-              <entry>Readable/Writeable</entry>
+              <entry>Readable/Writable</entry>
               <entry colname="col3">Default Value</entry>
             </row>
           </thead>
@@ -664,7 +664,7 @@ customer_id=123;</codeblock>
                     <li>The specified schema overrides the schema in the Avro file. See "Avro Schema
                       Overrides"</li>
                     <li>If not specified, Greenplum Database uses the Avro file schema.</li>
-                  </ul></p><p>For a writeable external table<ul id="ul_kl5_2yv_vs">
+                  </ul></p><p>For a writable external table<ul id="ul_kl5_2yv_vs">
                     <li>Uses the specified schema when creating the Avro file.</li>
                     <li>If not specified, Greenplum Database creates a schema according to the
                       external table definition.</li>
@@ -747,7 +747,7 @@ customer_id=123;</codeblock>
             <row>
               <entry colname="col1">Option</entry>
               <entry colname="col2">Values</entry>
-              <entry>Readable/Writeable</entry>
+              <entry>Readable/Writable</entry>
               <entry colname="col3">Default Value</entry>
             </row>
           </thead>

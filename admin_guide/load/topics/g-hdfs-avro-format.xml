@@ -117,7 +117,7 @@ done</codeblock></p>
                 <row>
                   <entry colname="col1">Parameter</entry>
                   <entry colname="col2">Value</entry>
-                  <entry>Readable/Writeable</entry>
+                  <entry>Readable/Writable</entry>
                   <entry colname="col3">Default Value</entry>
                 </row>
               </thead>
@@ -132,7 +132,7 @@ done</codeblock></p>
                         <li>The specified schema overrides the schema in the Avro file. See "Avro
                           Schema Overrides"</li>
                         <li>If not specified, Greenplum Database uses the Avro file schema.</li>
-                      </ul></p><p>For a writeable external table<ul id="ul_kl5_2yv_vs">
+                      </ul></p><p>For a writable external table<ul id="ul_kl5_2yv_vs">
                         <li>Uses the specified schema when creating the Avro file.</li>
                         <li>If not specified, Greenplum Database creates a schema according to the
                           external table definition.</li>
@@ -568,7 +568,7 @@ done</codeblock></p>
       <topic id="topic_ljx_2yv_vs">
         <title>Limitations</title>
         <body>
-          <p>For a Greenplum Database writeable external table definition, columns cannot specify
+          <p>For a Greenplum Database writable external table definition, columns cannot specify
             the <codeph>NOT NULL</codeph> clause.</p>
           <p>Greenplum Database does not support the Avro <codeph>map</codeph> data type and returns
             an error when encountered.</p>
@@ -593,7 +593,7 @@ done</codeblock></p>
    LOCATION ('gphdfs://my_hdfs:8020/tmp/at1
       ?schema=hdfs://my_hdfs:8020/avro/array_simple.avsc')
    FORMAT 'avro';</codeblock>
-          <p><codeph>CREATE WRITEABLE EXTERNAL TABLE</codeph> command that writes to an Avro file
+          <p><codeph>CREATE WRITABLE EXTERNAL TABLE</codeph> command that writes to an Avro file
             and specifies a namespace for the Avro schema.</p>
           <codeblock>CREATE WRITABLE EXTERNAL TABLE atudt1 (id int, info myt, birth date, salary numeric )
    LOCATION ('gphdfs://my_hdfs:8020/tmp/emp01.avro

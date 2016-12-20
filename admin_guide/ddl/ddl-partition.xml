@@ -843,7 +843,7 @@ INTO (PARTITION jan09, default partition);
                 starts the <codeph>gpfdist</codeph> protocol.
               <codeblock> $ gpfdist</codeblock></p></li>
             <li>Create a writable external table.<p>This <codeph>CREATE WRITABLE EXTENAL
-                  TABLE</codeph> command creates a writeable external table with the same columns as
+                  TABLE</codeph> command creates a writable external table with the same columns as
                 the partitioned
               table.</p><codeblock>CREATE WRITABLE EXTERNAL TABLE my_sales_ext ( LIKE sales_1_prt_yr_1 )
   LOCATION ( 'gpfdist://gpdb_test/sales_2000' )
@@ -852,7 +852,7 @@ INTO (PARTITION jan09, default partition);
             <li>Create a readable external table that reads the data from that destination of the
               writable external table created in the previous step.<p>This <codeph>CREATE EXTENAL
                   TABLE</codeph> create a readable external that uses the same external data as the
-                writeable external
+                writable external
               data.</p><codeblock>CREATE EXTERNAL TABLE sales_2000_ext ( LIKE sales_1_prt_yr_1)
   LOCATION ( 'gpfdist://gpdb_test/sales_2000' )
   FORMAT 'csv' ;</codeblock></li>

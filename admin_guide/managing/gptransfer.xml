@@ -48,23 +48,23 @@
     </section>
     <section>
       <title>What gptransfer Does</title>
-      <p><codeph>gptransfer</codeph> uses writeable and readable external tables, the Greenplum
+      <p><codeph>gptransfer</codeph> uses writable and readable external tables, the Greenplum
           <codeph>gpfdist</codeph> parallel data-loading utility, and named pipes to transfer data
         from the source database to the destination database. Segments on the source cluster select
-        from the source database table and insert into a writeable external table. Segments in the
+        from the source database table and insert into a writable external table. Segments in the
         destination cluster select from a readable external table and insert into the destination
-        database table. The writeable and readable external tables are backed by named pipes on the
+        database table. The writable and readable external tables are backed by named pipes on the
         source cluster's segment hosts, and each named pipe has a <codeph>gpfdist</codeph> process
         serving the pipe's output to the readable external table on the destination segments. </p>
       <p><codeph>gptransfer</codeph> orchestrates the process by processing the database objects to
         be transferred in batches. For each table to be transferred, it performs the following
           tasks:<ul id="ul_wsd_4tg_dp">
-          <li>creates a writeable external table in the source database</li>
+          <li>creates a writable external table in the source database</li>
           <li>creates a readable external table in the destination database</li>
           <li>creates named pipes and <codeph>gpfdist</codeph> processes on segment hosts in the
             source cluster</li>
           <li>executes a <codeph>SELECT INTO</codeph> statement in the source database to insert the
-            source data into the writeable external table</li>
+            source data into the writable external table</li>
           <li>executes a <codeph>SELECT INTO</codeph> statement in the destination database to
             insert the data from the readable external table into the destination table</li>
           <li>optionally validates the data by comparing row counts or MD5 hashes of the rows in the
@@ -95,7 +95,7 @@
           <codeph>gpfdist</codeph> per segment host.</p>
       <p>When the destination cluster is smaller than the source cluster, there is one named pipe
         per segment host and all segments on the host send their data through it. The segments on
-        the source host write their data to a writeable web external table connected to a
+        the source host write their data to a writable web external table connected to a
           <codeph>gpfdist</codeph> process on the input end of the named pipe. This consolidates the
         table data into a single named pipe. A <codeph>gpfdist</codeph> process on the output of the
         named pipe serves the consolidated data to the destination cluster. The following figure
